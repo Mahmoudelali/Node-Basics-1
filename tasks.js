@@ -60,6 +60,8 @@ function onDataReceived(text) {
 		remove(text);
 	} else if (text.startsWith('edit')) {
 		edit(text, tasks);
+	} else if (text.startsWith('check')) {
+		check(text);
 	} else {
 		unknownCommand(text);
 	}
@@ -93,14 +95,37 @@ function remove(task) {
 	if (task === 'remove\n') {
 		tasks.pop();
 	} else {
-		let index = task.replace('remove', '').replace('\n', '').trim();
-		if (!tasks.indexOf[index - 1]) {
+		let index = Number(task.replace('remove', '').replace('\n', '').trim());
+
+		if (tasks.indexOf[index - 1] == -1) {
 			console.log('task number does not exist');
 		}
-		index -= 1;
-		tasks.splice(index, 1);
+		tasks.splice(index - 1, 1);
 		console.log(tasks);
 	}
+}
+// list element
+function list(arr, passingArg) {
+	if (arr.length == 0) {
+		console.log('No tasks to display !');
+	}
+	let str = '';
+
+	for (let i in arr) {
+		if (arr[i] == arr[passingArg]) {
+			str += `[✓]: ${arr[i]}\n`;
+			continue;
+		}
+		str += `[ ]: ${tasks[i]}\n`;
+	}
+	console.log(str);
+}
+// check element
+
+function check(task) {
+	let index = Number(task.replace('check', '').replace('\n', '').trim());
+	console.log(`${index}`);
+	list(tasks, index);
 }
 
 /**
@@ -110,16 +135,6 @@ function remove(task) {
  */
 function hello() {
 	console.log('hello!');
-}
-function list(arr) {
-	if (arr.length == 0) {
-		console.log('err , no tasks to display');
-	}
-	let str = '';
-	for (let i in tasks) {
-		str += `${i} : ${tasks[i]}\n`;
-	}
-	console.log(str);
 }
 
 function exit() {
