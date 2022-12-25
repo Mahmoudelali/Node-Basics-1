@@ -95,7 +95,7 @@ function remove(task) {
 	if (task === 'remove\n') {
 		tasks.pop();
 	} else {
-		let index = Number(task.replace('remove', '').replace('\n', '').trim());
+		let index = Number(task.replace('remove', '').replace('\n', '').trim()) ;
 
 		if (tasks.indexOf[index - 1] == -1) {
 			console.log('task number does not exist');
@@ -122,11 +122,30 @@ function list(arr, passingArg) {
 }
 // check element
 
-function check(task) {
-	let index = Number(task.replace('check', '').replace('\n', '').trim());
-	console.log(`${index}`);
+function check(task ) {
+	let index = Number(task.replace('check', '').replace('\n', '').trim()) -1;
 	list(tasks, index);
 }
+
+function uncheck (task , arr) {
+	let index = Number(task.replace('uncheck', '').replace('\n', '').trim());
+	// 
+	if (arr.length == 0) {
+		console.log('No tasks to display !');
+	}
+	let str = '';
+
+	for (let i in arr) {
+		if (arr[i] == arr[index]) {
+			str += `[✓]: ${arr[i]}\n`;
+			continue;
+		}
+		str += `[ ]: ${tasks[i]}\n`;
+	}
+	console.log(str);
+	// 
+}
+
 
 /**
  * Says hello
