@@ -1,3 +1,4 @@
+let fs = require('./fs');
 /**
  * Starts the application
  * This is the function that is run when the app starts
@@ -25,6 +26,7 @@ const commands = [
 	'add',
 	'remove',
 	'remove <task>',
+	'check',
 ];
 /**
  * Decides what to do depending on the data that was received
@@ -95,7 +97,7 @@ function remove(task) {
 	if (task === 'remove\n') {
 		tasks.pop();
 	} else {
-		let index = Number(task.replace('remove', '').replace('\n', '').trim()) ;
+		let index = Number(task.replace('remove', '').replace('\n', '').trim());
 
 		if (tasks.indexOf[index - 1] == -1) {
 			console.log('task number does not exist');
@@ -122,14 +124,14 @@ function list(arr, passingArg) {
 }
 // check element
 
-function check(task ) {
-	let index = Number(task.replace('check', '').replace('\n', '').trim()) -1;
+function check(task) {
+	let index = Number(task.replace('check', '').replace('\n', '').trim()) - 1;
 	list(tasks, index);
 }
 
-function uncheck (task , arr) {
+function uncheck(task, arr) {
 	let index = Number(task.replace('uncheck', '').replace('\n', '').trim());
-	// 
+	//
 	if (arr.length == 0) {
 		console.log('No tasks to display !');
 	}
@@ -143,9 +145,8 @@ function uncheck (task , arr) {
 		str += `[ ]: ${tasks[i]}\n`;
 	}
 	console.log(str);
-	// 
+	//
 }
-
 
 /**
  * Says hello
